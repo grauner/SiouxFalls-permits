@@ -194,7 +194,7 @@
 	</footer>
 
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-	<script src="data/Building_Permits112019.geojson"></script>
+	<script src="data/Building-Permits112019.js"></script>
 	<script>
 		// map options
 		var options = {
@@ -219,6 +219,46 @@
 
 		// request some basemap tiles and add to the map
 		var tiles = L.tileLayer(basemap_source, basemap_options).addTo(map);
+
+		
+		//layer info
+		var layerInfo ={
+      			resLayer,
+      		//	comLayer
+      		};
+		
+
+	// 	var resLayer = L.geoJson(permits, {
+    //     pointToLayer: function (feature, latlng) {
+    //     return L.circleMarker(latlng, {
+    //         radius: 5, 
+    //         color: 'red',
+    //          fillColor: 'red',
+    //          weight: .1,
+    //          stroke: 0,
+    //          fillOpacity: 1,
+    //      })
+    //     }
+	//   }).addTo(map)	 
+	 
+	  
+	  var resLayer = L.geoJson(permits, {
+ pointToLayer: function(feature,latlng) {
+   return L.circleMarker(latlng, commonStyles);
+ },
+ filter: function(feature) {
+   if(feature.properties.PERMITTYPE.ResidentialBuilding) {
+     return feature;
+   }
+ },
+ style: function(feature) {
+   return {
+     color: '#fffb01',
+     fillColor: '#fffb01',   
+   }
+ }
+}).addTo(map);
+
 
 		// Load power plants 
 		plants.features.sort(function(a, b) {
