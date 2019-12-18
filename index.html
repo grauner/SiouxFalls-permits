@@ -12,14 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,900i" rel="stylesheet">
 
 	<style>
-		/* 
-			UKy Colors: 
-            #c7c9c8 light gray 
-            #63666a dark gray
-            #15397f dark blue
-            #009bda light blue
-            #0033a0 official blue
-        */
+		
 		body {
 			margin: 0;
 			padding: 0;
@@ -194,7 +187,8 @@
 	</footer>
 
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-	<script src="data/Building-Permits112019.js"></script>
+	<script src="data/Building-Permits-Res112019.js"></script>
+	<script src="data/Building-Permits-Com112019.js"></script>
 	<script>
 		// map options
 		var options = {
@@ -208,7 +202,7 @@
 		// Leaflet providers base map URL
 		var basemap_source =
 			'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
-		//	'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/dark_all/{z}/{x}/{y}.png'
+		
 
 		// Leaflet providers attributes
 		var basemap_options = {
@@ -224,11 +218,11 @@
 		//layer info
 		var layerInfo ={
       			resLayer,
-      		//	comLayer
+      			comLayer
       		};
 		
 
-		var resLayer = L.geoJson(permits, {
+		var resLayer = L.geoJson(respermits, {
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
             radius: 5, 
@@ -241,7 +235,20 @@
         }
 	  }).addTo(map)	 
 	 
-	  
+
+	  var comLayer = L.geoJson(compermits, {
+        pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 5, 
+            color: 'blue',
+             fillColor: 'blue',
+             weight: .1,
+             stroke: 0,
+             fillOpacity: 1,
+         })
+        }
+	  }).addTo(map)	 
+
 // 	  var resLayer = L.geoJson(permits, {
 //  pointToLayer: function(feature,latlng) {
 //    return L.circleMarker(latlng, style);
@@ -262,7 +269,6 @@
 //    }
 //  }
 // }).addTo(map);
-
 
 // 		var commonStyles = {
 //  weight: .5,
