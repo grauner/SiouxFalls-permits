@@ -249,6 +249,13 @@
         }
 	  }).addTo(map)	 
 
+
+	  var sourcesLayers = {
+ "<b style='color:Red'>Residental</b>": resLayer,
+ "<b style='color:Blue'>Commerical</b>": comLayer
+}
+L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
+
 // 	  var resLayer = L.geoJson(permits, {
 //  pointToLayer: function(feature,latlng) {
 //    return L.circleMarker(latlng, style);
